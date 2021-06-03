@@ -1,7 +1,9 @@
 const authRouter = require('express').Router()
+const express = require("express");
 const User = require('../models/User')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+authRouter.use(express.urlencoded({extended: false}))
 
 authRouter.post('/register', async (req, res) => {
     const emailExist = await User.findOne({email : req.body.email})
