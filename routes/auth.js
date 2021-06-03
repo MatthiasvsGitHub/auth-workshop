@@ -28,7 +28,7 @@ authRouter.post('/login', async (req, res) => {
     const comparePassword = await bcrypt.compare(req.body.password, user.password)
     if(!comparePassword) return res.status(400).send('Wrong password')
 
-    const token = jwt.sign({user}, process.env.SECRET)
+    const token = jwt.sign({user}, process.env.SECRET, { expiresIn: '1h' })
     res.header('auth-token', token)
     res.json(token)
 
